@@ -60,10 +60,10 @@ export default {
     async upload() {
         try {
             const formData = new FormData();
-            formData.append('photo', this.file, this.file.name);
+            formData.append('recipe', this.file, this.file.name);
             formData.append('title', this.title);
             formData.append('description', this.description);
-            await axios.post("/api/photos", formData);
+            await axios.post("/api/recipes", formData);
             this.file = null;
             this.url = "";
             this.title = "";

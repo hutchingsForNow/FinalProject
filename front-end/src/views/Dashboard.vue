@@ -1,18 +1,19 @@
 <template>
 <div class="dashboard">
-  <MyPhotos v-if="user" />
+  <MyRecipe v-if="user" />
   <Login v-else />
+  <br/>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
 import Login from '@/components/Login.vue';
-import MyPhotos from '@/components/MyPhotos.vue';
+import MyRecipe from '@/components/MyRecipes.vue';
 export default {
   name: 'dashboard',
   components: {
-    MyPhotos,
+    MyRecipe,
     Login,
   },
   async created() {
@@ -33,6 +34,8 @@ export default {
 
 <style scoped>
 .dashboard {
-  padding-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
+
 </style>

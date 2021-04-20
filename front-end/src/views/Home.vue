@@ -1,32 +1,33 @@
 <template>
 <div class="home">
-  <image-gallery :photos="photos" />
+  <cookBook :recipes="recipes" />
   <p v-if="error">{{error}}</p>
+  <br/>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import ImageGallery from '@/components/ImageGallery.vue';
+import CookBook from '@/components/CookBook.vue';
 export default {
   name: 'Home',
   components: {
-    ImageGallery,
+    CookBook,
   },
   created() {
-    this.getPhotos();
+    this.getRecipes();
   },
   data() {
     return {
-      photos: [],
+      recipes: [],
       error: '',
     }
   },
   methods: {
-    async getPhotos() {
+    async getRecipes() {
       try {
-        let response = await axios.get("/api/photos/all");
-        this.photos = response.data;
+        let response = await axios.get("/api/recipes/all");
+        this.recipes = response.data;
       } catch (error) {
         this.error = error.response.data.message;
       }
@@ -34,3 +35,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.home{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+</style>

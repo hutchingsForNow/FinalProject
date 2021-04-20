@@ -1,51 +1,32 @@
-# Photo Bomb
+Recipes
 
-In this assignment, you will build an entire web application, using Vue CLI for
-the front end and Node, Express, and Mongo on the back end.
+This is a combination of the vue todo list and lab 5
 
-## Starting the Lab
+I will have a login and suggested recipes from an api for all users.
 
-To start the lab, you must follow this [GitHub Classroom link](https://classroom.github.com/a/-aRFwru4). This will create a private repository for you using our classroom site. We will only grade repositories created and submitted this way.
+Once added to Digital Ocean, it will be secured.
 
-Once you "Accept the assignment" on GitHub Classroom, it will create a new repository for you and grant you access to it on GitHub. In order to start working on the lab, simply clone the repository to your laptop or other working environment.
+Home:
+    sees a gallery of all the ingredients and their pictures
+    Functionality: //will only be on their individual accounts
+        can click on individual recipes and see a larger photo of it as well as a list of items for it.
 
-## Tutorial
+Dashboard:
+    image of the food or image they upload
+    description should just be the name of the food and maybe a bit of what kind of food it is.
+    Functionality: //will only be on their individual accounts
+        Create - can add their own recipes
+        Edit - can edit recipes
+        Delete - can delete the recipes they added only. Can not delete suggessted recipes.
 
-Use the [tutorials](/tutorials/README.md) to create the application. This will help you create an application for sharing photos, including user authentication,
-uploading photos to a user's account, seeing all the photos in a user's account,
-and showing all photos on the home page. Once you are done, the home page should
-look like this:
+Todo List:
+    has a list of their ingredients.
+    Functionality: //will only be on their individual accounts
+        Create: can add ingredients or cooking instruction - see if you can allow the user to change the order of  
+            items
+        Edit: maybe add functionality to edit the items on the list; Can cross items off list - cannot be permanent
+        Delete: can delete items from their list
 
-![home page](/screenshots/home.png)
-
-and a user's photo page should look like this:
-
-![photo page](/screenshots/uploaded-photos.png)
-
-## Additional Functionality
-
-Once you complete these introductory tutorials, add the following functionality:
-
-- [Photo Page](/tutorials/part7.md)
-- [Comments](/tutorials/part8.md)
-
-Then [install your app on Digital Ocean](/tutorials/part9.md).
-
-## Link to GitHub repository
-
-In a footer, you must include a link to your GitHub repository, which must be stored in GitHub Classroom.
-
-## Submission
-
-On Canvas, submit the URL for your website, which should be running on your DigitalOcean server.
-
-## Rubric for Grading
-
-When we grade these labs, we will award points using the following
-rubric:
-
-| Item                                                                                         | Points |
-| -------------------------------------------------------------------------------------------- | ------ |
-| The material in the tutorial works. Add ten photos of your own from at least two different accounts to demonstrate this. | 70     |
-| Photo page meets requirements                                                                | 10     |
-| Comments meet requirements                                                                   | 20     |
+How it is different from previous projects:
+    added a todo-list to all recipes that will be created when it is added or created by the user or api.
+    use an aditional api to gather more recipes
