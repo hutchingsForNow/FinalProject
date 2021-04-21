@@ -3,7 +3,7 @@
 <div class="recipe">
   <p v-if="error">{{error}}</p>
   <div class='recipeContent' v-if=recipe>
-    <br/><br/>
+    <br/>
     <h1>{{recipe.title}}</h1>
     <img :src="recipe.path"/>
     <h2>{{recipe.description}}</h2>
@@ -12,15 +12,15 @@
     <button :style="{backgroundColor: project.color}" :class="{ white: darkColor(project.color), selected: active(project)}" v-for="project in projects" :key=project.id @click=selectProject(project)>{{project.name}}</button>
   </div>
   <form @submit.prevent="addProject">
-      <input type="text" v-model="projectName" placeholder="e.g. ingredients, steps">
-      <swatches-picker v-model="color"/>
-      <button type="submit">Add a Step</button>
+        <input type="text" class='projName' v-model="projectName" placeholder="e.g. ingredients, steps">
+        <button type="submit">Add Step</button>
+        <swatches-picker v-model="color"/>
     </form>
   <div class="todoItems" v-if="project">
     <p v-show="activeItems.length === 0">You are done with all your tasks! Good job!</p>
     <form @submit.prevent="addItem">
-      <input type="text" v-model="text" placeholder="e.g. start cooking rice">
-      <button type="submit">Add an Item</button>
+      <input type="text" v-model="text" placeholder="e.g. rice, fry meat">
+      <button type="submit">Add Item</button>
     </form>
     <div class="controls">
       <button @click="showAll()">Show All</button>
@@ -106,7 +106,7 @@ export default {
     },    
     async addProject() {
       try {
-        await axios.post("/api/projects", {
+        await axios.post("/api/recipes/" + this.$route.params.id + "/projects", {
           name: this.projectName,
           color: this.color.hex,
         });
@@ -117,7 +117,7 @@ export default {
     },
     async getProjects() {
       try {
-        const response = await axios.get("/api/projects");
+        const response = await axios.get("/api/recipes/" + this.$route.params.id + "/projects");
         this.projects = response.data;
       } catch (error) {
         console.log(error);
@@ -129,7 +129,7 @@ export default {
     },
     async getItems() {
       try {
-        const response = await axios.get(`/api/projects/${this.project._id}/items`);
+        const response = await axios.get(`/api/recipes/${this.recipe._id}/projects/${this.project._id}/items`);
         this.items = response.data;
       } catch (error) {
         console.log(error);
@@ -137,7 +137,7 @@ export default {
     },
     async addItem() {
       try {
-        await axios.post(`/api/projects/${this.project._id}/items`, {
+        await axios.post(`/api/recipes/${this.recipe._id}/projects/${this.project._id}/items`, {
           text: this.text,
           completed: false
         });
@@ -149,7 +149,7 @@ export default {
     },
     async completeItem(item) {
       try {
-        axios.put(`/api/projects/${this.project._id}/items/${item._id}`, {
+        axios.put(`/api/recipes/${this.recipe._id}/projects/${this.project._id}/items/${item._id}`, {
           text: item.text,
           completed: !item.completed,
         });
@@ -160,7 +160,7 @@ export default {
     },
     async deleteItem(item) {
       try {
-        await axios.delete(`/api/projects/${this.project._id}/items/${item._id}`);
+        await axios.delete(`/api/recipes/${this.recipe._id}/projects/${this.project._id}/items/${item._id}`);
         this.getItems();
       } catch (error) {
         console.log(error);
@@ -187,13 +187,14 @@ export default {
     darkColor(color) {
       return (this.lightOrDark(color) === 'dark');
     },
-    lightOrDark(color) {
-      let hex = color;
+    lightOrDark(/*color*/) {
+      return 'dark';
+    /*  let hex = color;
       if (typeof color === 'object' && color !== null)
         hex = color.hex;
 
     // Convert it to RGB: http://gist.github.com/983661
-      let rgb = +("0x" + hex.slice(1).replace( 
+      let rgb = +0; ("0x" + hex.slice(1).replace( 
       hex.length < 5 && /./g, '$&$&'));
 
       const r = rgb >> 16;
@@ -213,7 +214,7 @@ export default {
       } 
       else {
           return 'dark';
-      }
+      }*/
     }
   }
 }
@@ -244,7 +245,8 @@ h2{
 img{
   margin-top: 30px;
   margin: auto;
-  width: 50%;
+  max-width: 50%;
+  max-height: 600px;
   display: block;
 }
 
@@ -263,8 +265,6 @@ li {
   align-items: center;
 }
 
-
-
 p {
   font-size: small;
 }
@@ -276,6 +276,7 @@ p {
 
 li:hover .delete {
   display: block;
+  transform: scale(.5);
 }
 
 label {
@@ -296,9 +297,20 @@ input[type=text] {
   font-size: 1em;
 }
 
+/* make it so that when you hover or select the projectName box, the vc-swathes colors will appear. Otherwise they are not showing */
 .vc-swatches {
+  /*margin-bottom: 20px;*/
+  display: none;
+}
+
+.projName:hover .vc-swatches{
   margin-bottom: 20px;
-  display: block;
+  display:block;
+}
+
+.projName:select .vc-swatches{
+  margin-bottom: 20px;
+  display:block;
 }
 
 #projects {
@@ -310,7 +322,7 @@ button {
   font-family: 'Arvo';
   font-size: 1em;
   border: none;
-  background-color: rgb(253, 255, 136);
+  background-color: #ffe056;
   padding: 5px 10px;
   margin: 10px;
   margin-bottom: 20px;
@@ -320,12 +332,16 @@ button:focus {
   outline: none;
 }
 
+button:hover {
+  border: 2px solid white;
+}
+
 button.selected {
   border: 2px solid #000;
 }
 
 .white {
-  color: seashell;
+  color: white;
 }
 
 /* Controls */
@@ -364,17 +380,17 @@ button.selected {
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: rgb(255, 200, 200);
+  background-color: rgb(175, 255, 255);
 }
 
 /* On mouse-over, add a more red background color */
 .item:hover input~.checkmark {
-  background-color: rgb(255, 164, 164);
+  background-color: rgb(86, 248, 248);
 }
 
 /* When the checkbox is checked, add a light blue background */
 .item input:checked~.checkmark {
-  background-color: #97d0ff;
+  background-color: #ffec97;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

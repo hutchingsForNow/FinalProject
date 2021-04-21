@@ -113,6 +113,7 @@ h1 {
 
 .hero form legend {
   font-size: 20px;
+  color: white;
 }
 
 input {

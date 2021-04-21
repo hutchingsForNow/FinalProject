@@ -2,7 +2,7 @@
 <div class="home">
   <cookBook :recipes="recipes" />
   <p v-if="error">{{error}}</p>
-  <br/>
+  <br/><br/>
 </div>
 </template>
 
