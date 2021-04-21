@@ -300,7 +300,7 @@ input[type=text] {
 /* make it so that when you hover or select the projectName box, the vc-swathes colors will appear. Otherwise they are not showing */
 .vc-swatches {
   /*margin-bottom: 20px;*/
-  display: none;
+  display: block;
 }
 
 .projName:hover .vc-swatches{

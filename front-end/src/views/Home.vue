@@ -1,5 +1,6 @@
 <template>
 <div class="home">
+  <br/>
   <cookBook :recipes="recipes" />
   <p v-if="error">{{error}}</p>
   <br/><br/>

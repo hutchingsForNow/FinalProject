@@ -1,5 +1,6 @@
 <template>
 <div class="dashboard">
+  <br/>
   <MyRecipe v-if="user" />
   <Login v-else />
   <br/>

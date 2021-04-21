@@ -38,9 +38,5 @@ app.use("/api/users", users.routes);
 //imports recipes module
 const recipes = require("./recipes.js");
 app.use("/api/recipes", recipes.routes);
-/*
-//imports recipes from api
-const search = require("./search.js");
-app.use("/api/search", search.routes);
-*/
+
 app.listen(3001, () => console.log('Server listening on port 3001!'));

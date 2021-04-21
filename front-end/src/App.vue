@@ -1,10 +1,6 @@
 <template>
   <div id="app">
     <br/>
-    <div id='searchBar'>
-      <input id="recipeInput" type="text" placeholder="search for new recipes"/>
-      <a href='views/search.html'><input id="recipeSubmit" type="submit" value="Search"/></a>
-    </div>
     <header id="header">
       <h1 class="h1">Recipes</h1>
       <nav>
@@ -33,9 +29,7 @@
   </div>
   </div>
 </template>
-<!--
-<script text="type/javascript" src="search.js"></script>
--->
+
 <style>
 
 #app{
@@ -71,21 +65,6 @@
 nav {
   display: flex;
   justify-content: center;
-}
-
-#searchBar{
-  margin: 0 0 0 75%;
-  position: relative; 
-  z-index: 10000;
-  
-}
-
-#recipeSubmit {
-  background-color: #ff6b6b;
-}
-
-#recipeSubmit:hover {
-  box-shadow: 0 0 5px 3px rgb(117, 173, 65);
 }
 
 h1 {

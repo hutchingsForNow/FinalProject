@@ -3,12 +3,12 @@
   <div class="modal-mask">
     <div class="modal-container">
       <form class="pure-form" @submit.prevent="upload">
-        <legend>Upload a picture</legend>
+        <legend>Upload a recipe</legend>
         <fieldset>
           <input v-model="title" placeholder="Title">
         </fieldset>
         <fieldset>
-          <textarea v-model="description" placeholder="Description"></textarea>
+          <textarea v-model="description" placeholder="Add a short decription of the meal. Once you click on the image, you will be able to add more details such as cooking insruction or needed ingredients."></textarea>
         </fieldset>
         <fieldset>
           <div class="imageInput" @click="chooseImage">
